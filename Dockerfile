@@ -19,22 +19,22 @@ RUN npm run build
 FROM base as dev
 ENV NODE_ENV=development
 ENV PATH=/opt/node_modules/.bin:$PATH
-#RUN apk add --no-cache tini
+RUN apk add --no-cache tini
 WORKDIR /opt
 COPY package*.json ./
 RUN npm install --development
 WORKDIR /opt/app
 COPY . .
-#ENTRYPOINT [ "/sbin/tini", "--" ]
+ENTRYPOINT [ "/sbin/tini", "--" ]
 CMD [ "npm", "run", "dev" ]
 
 #Production Stage
 FROM base as prod
-#RUN apk add --no-cache tini
+RUN apk add --no-cache tini
 WORKDIR /opt/app
 COPY . .
 ENV PORT=4001
 EXPOSE 4001
-#ENTRYPOINT [ "/sbin/tini", "--" ]
+ENTRYPOINT [ "/sbin/tini", "--" ]
 COPY --from=build /opt/app/build build/
 CMD [ "node", "./build/index.js" ]
