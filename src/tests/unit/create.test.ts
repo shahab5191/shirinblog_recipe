@@ -30,12 +30,12 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("name")
     })
-    test("it should return 200 when name is alphanumeric", async () => {
+    test("it should return 201 when name is alphanumeric", async () => {
       const inputs = createInput({})
       const response = await request(app)
         .post("/api/v1/recipe/create")
         .send(inputs)
-        .expect(200)
+        .expect(201)
     })
     test("it should return 403 if name length is less than 4 chars", async () => {
       const name = randomAlphaNumeric(1, 1, 0)
@@ -81,9 +81,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("title")
     })
-    test("it should return 200 when title is alphanumeric", async () => {
+    test("it should return 201 when title is alphanumeric", async () => {
       const inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if title length is less than 4 chars", async () => {
       const title = randomAlphaNumeric(1, 1, 0)
@@ -118,9 +118,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("description")
     })
-    test("it should return 200 when description is alphanumeric", async () => {
+    test("it should return 201 when description is alphanumeric", async () => {
       const inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if description length is less than 4 chars", async () => {
       const description = randomAlphaNumeric(1, 1, 0)
@@ -155,13 +155,13 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("difficulty")
     })
-    test("it should return 200 when difficulty is either EASY, MEDIUM or HARD", async () => {
+    test("it should return 201 when difficulty is either EASY, MEDIUM or HARD", async () => {
       let inputs = createInput({ difficulty: "EASY" })
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
       inputs.difficulty = "MEDIUM"
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
       inputs.difficulty = "HARD"
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if difficulty is not EASY, MEDIUM or HARD", async () => {
       const inputs = createInput({ difficulty: "asdfw" })
@@ -197,9 +197,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("ingredients")
     })
-    test("it should return 200 when ingredients is array of strings", async () => {
+    test("it should return 201 when ingredients is array of strings", async () => {
       const inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if any of ingredients length is less than 2 chars", async () => {
       const ingredItem = "a"
@@ -258,9 +258,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("categories")
     })
-    test("it should return 200 when categories is array of strings", async () => {
+    test("it should return 201 when categories is array of strings", async () => {
       const inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if any of categories length is less than 2 chars", async () => {
       const categoryItem = "a"
@@ -319,9 +319,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("steps")
     })
-    test("it should return 200 when steps is array of strings", async () => {
+    test("it should return 201 when steps is array of strings", async () => {
       const inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if any of steps length is less than 4 chars", async () => {
       const stepsItem = "abc"
@@ -368,13 +368,13 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("status")
     })
-    test("it should return 200 when status is either DRAFT, PUBLISH or TRASH", async () => {
+    test("it should return 201 when status is either DRAFT, PUBLISH or TRASH", async () => {
       let inputs = createInput({ status: "DRAFT" })
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
       inputs.status = "PUBLISH"
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
       inputs.status = "TRASH"
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 if status is not DRAFT, PUBLISH or TRASH", async () => {
       const inputs = createInput({ status: "asdfw" })
@@ -399,9 +399,9 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("timing")
     })
-    test("it should return 200 when timing has preparation, cooking and additional properties", async () => {
+    test("it should return 201 when timing has preparation, cooking and additional properties", async () => {
       let inputs = createInput({})
-      await request(app).post("/api/v1/recipe/create").send(inputs).expect(200)
+      await request(app).post("/api/v1/recipe/create").send(inputs).expect(201)
     })
     test("it should return 403 when timing does not have any of preparation, cooking and additional properties", async () => {
       const timing = { cooking: 10, additional: 10 }
@@ -511,17 +511,17 @@ describe("Testing create recipe inputs", () => {
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("servings")
     })
-    test("should return 200 if servings field is int", async () => {
+    test("should return 201 if servings field is int", async () => {
       const inputs = createInput({})
       const response = await request(app)
         .post("/api/v1/recipe/create")
         .send(inputs)
-        .expect(200)
+        .expect(201)
     })
   })
 })
 
-describe.only("testing create route", () => {
+describe("testing create route", () => {
   test("with correct inputs it should create a recipe", async () => {
     const inputs = createInput({})
     const response = await request(app)
@@ -533,5 +533,6 @@ describe.only("testing create route", () => {
     expect(response.body.data).toHaveProperty("id")
     expect(response.body).toHaveProperty("success")
     expect(response.body.success).toBe(true)
+    console.log(response.body.data.id)
   })
 })

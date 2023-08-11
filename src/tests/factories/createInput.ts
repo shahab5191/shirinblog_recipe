@@ -1,4 +1,4 @@
-import { randomAlphaNumeric, randomAlphaString } from "./random-gen";
+import { randomAlphaNumeric, randomAlphaString, randomUrl } from "./random-gen";
 
 interface CreateRecipeInputs {
   name?: any
@@ -12,6 +12,7 @@ interface CreateRecipeInputs {
   timing?: any
   servings?: any
   dietary?: any
+  image?: any
 }
 
 export const createInput = (inputs: CreateRecipeInputs) => {
@@ -42,7 +43,7 @@ export const createInput = (inputs: CreateRecipeInputs) => {
   }
   let servings = inputs.servings !== undefined? inputs.servings :  Math.floor(Math.random() * 100)
   let dietary = inputs.dietary !== undefined? inputs.dietary : randomAlphaString()
-
+  let image = inputs.image !== undefined? inputs.image : randomUrl()
   return {
     name,
     title,
@@ -54,6 +55,7 @@ export const createInput = (inputs: CreateRecipeInputs) => {
     status,
     timing,
     servings,
-    dietary
+    dietary,
+    image
   }
 }

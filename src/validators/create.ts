@@ -77,4 +77,7 @@ export const createValidator = [
   body("dietary")
     .isAlpha()
     .withMessage("Dietary restriction should be a string"),
+  body("image")
+    .isURL()
+    .withMessage('image field must be url')
 ]

@@ -30,3 +30,13 @@ export const randomAlphaString = (length: number = 15) => {
   }
   return str
 }
+
+export const randomUrl = () => {
+  let str = "https://www."
+  for(let i = 0; i < 10; i++){
+    var char = Math.random() * 26 + 97
+    str += String.fromCharCode(char)
+  }
+  str += ".com/test"
+  return str
+}

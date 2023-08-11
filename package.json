@@ -14,7 +14,12 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "globalSetup": "<rootDir>/src/tests/setup/globalSetup.ts",
+    "globalTeardown": "<rootDir>/src/tests/setup/globalTeardown.ts",
+    "setupFilesAfterEnv": [
+      "./src/tests/setup/setup.ts"
+    ]
   },
   "nodemonConfig": {
     "watch": [
