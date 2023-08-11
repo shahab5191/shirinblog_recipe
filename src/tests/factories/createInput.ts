@@ -5,7 +5,7 @@ interface CreateRecipeInputs {
   title?: any
   description?: any
   difficulty?: any
-  ingredient?: any
+  ingredients?: any
   categories?: any
   steps?: any
   status?: any
@@ -19,7 +19,7 @@ export const createInput = (inputs: CreateRecipeInputs) => {
   let title = inputs.title !== undefined? inputs.title : randomAlphaNumeric();
   let description = inputs.description !== undefined? inputs.description : randomAlphaNumeric();
   let difficulty = inputs.difficulty !== undefined? inputs.difficulty : "EASY"
-  let ingredients = inputs.ingredient !== undefined? inputs.ingredient : [
+  let ingredients = inputs.ingredients !== undefined? inputs.ingredients : [
     randomAlphaNumeric(),
     randomAlphaNumeric(),
     randomAlphaNumeric()
