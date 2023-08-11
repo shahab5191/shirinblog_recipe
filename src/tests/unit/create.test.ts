@@ -3,7 +3,7 @@ import app from "../../app"
 import { createInput } from "../factories/createInput"
 import { randomAlphaNumeric } from "../factories/random-gen"
 
-describe("Testing create recipe route", () => {
+describe("Testing create recipe inputs", () => {
   test("it should return 403 body is empty", async () => {
     await request(app).post("/api/v1/recipe/create").send({}).expect(403)
   })
@@ -478,17 +478,17 @@ describe("Testing create recipe route", () => {
 
   describe("testing servings field", () => {
     test("should return 403 if servings field is not int", async () => {
-      let inputs = createInput({servings: "aa"})
+      let inputs = createInput({ servings: "aa" })
       let response = await request(app)
-        .post('/api/v1/recipe/create')
+        .post("/api/v1/recipe/create")
         .send(inputs)
         .expect(403)
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("servings")
 
-      inputs = createInput({servings: null})
+      inputs = createInput({ servings: null })
       response = await request(app)
-        .post('/api/v1/recipe/create')
+        .post("/api/v1/recipe/create")
         .send(inputs)
         .expect(403)
       expect(response.body).toHaveProperty("errors")
@@ -497,15 +497,15 @@ describe("Testing create recipe route", () => {
       inputs = createInput({})
       inputs.servings = undefined
       response = await request(app)
-        .post('/api/v1/recipe/create')
+        .post("/api/v1/recipe/create")
         .send(inputs)
         .expect(403)
       expect(response.body).toHaveProperty("errors")
       expect(response.body.errors[0].field).toBe("servings")
 
-      inputs = createInput({servings: 1.4})
+      inputs = createInput({ servings: 1.4 })
       response = await request(app)
-        .post('/api/v1/recipe/create')
+        .post("/api/v1/recipe/create")
         .send(inputs)
         .expect(403)
       expect(response.body).toHaveProperty("errors")
@@ -514,9 +514,24 @@ describe("Testing create recipe route", () => {
     test("should return 200 if servings field is int", async () => {
       const inputs = createInput({})
       const response = await request(app)
-        .post('/api/v1/recipe/create')
+        .post("/api/v1/recipe/create")
         .send(inputs)
         .expect(200)
     })
+  })
+})
+
+describe.only("testing create route", () => {
+  test("with correct inputs it should create a recipe", async () => {
+    const inputs = createInput({})
+    const response = await request(app)
+      .post("/api/v1/recipe/create")
+      .send(inputs)
+      .expect(201)
+
+    expect(response.body).toHaveProperty("data")
+    expect(response.body.data).toHaveProperty("id")
+    expect(response.body).toHaveProperty("success")
+    expect(response.body.success).toBe(true)
   })
 })

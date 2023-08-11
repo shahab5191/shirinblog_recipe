@@ -17,7 +17,7 @@ router.post(
       next(new SBError(VALIDATION_ERR, errors.array()));
       return;
     }
-    res.status(200).send("<h1>Create Recipe</h1>");
+
   }
 );
 
